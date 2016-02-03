@@ -1,0 +1,58 @@
+=begin
+
+This script is used for extracting the table names from the file
+
+The file stores free text.
+
+It reads a file, parses the content and writes to another file..
+
+=end
+require "set"
+def get_tables(fileToReadFrom)
+
+	#read from file
+	file = File.open(fileToReadFrom, 'r')
+	arr = Set.new
+	
+	get_str = lambda do |text| 
+					
+			if text.include? "where"
+				text = text[/(.*?)where/i, 1]
+				
+				#return text
+			end
+			text = text.gsub(/"|&|_/i, "")
+		end
+	
+	lbd = lambda { |text| text.split(",").map {|item| item.chomp.strip.upcase} }
+	
+	while(text = file.gets)
+		text = text.downcase
+			text = text.partition("from").last
+			
+			text = get_str.call text
+#			puts text
+			table_names = lbd.call(text)
+			arr.merge table_names
+	end
+	
+	file.close	
+	
+	return arr.to_a.sort.join "\n"
+end
+
+def write(file_loc, str)
+	file = File.open(file_loc, "w")
+	
+	file.write str
+	file.close
+	
+	puts "Content parsed and written to the file."
+end
+
+
+disc_str = get_tables("sqlQueries.txt")
+
+write("tablenames.txt", disc_str)
+
+#puts $result

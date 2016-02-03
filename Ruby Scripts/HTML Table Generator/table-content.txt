@@ -1,0 +1,7 @@
+Application Tracker Home	Select this option to view applications submitted in the last 2 weeks. Applications are displayed on a map
+Search	Use the "Search" option if you have the application number or particulars about the property such as street or locality
+Undetermined Applications	Applications that are currently being assessed
+Applications on Exhibition	Applications that are being publicly notified in accordance with legislation and/or Cooma-Monaro Shire Council Development Control Plan 2014
+Applications Submitted	View applications submitted over a specific period (week or month)
+Applications Determined	View applications determined over a specific period (week or month)
+

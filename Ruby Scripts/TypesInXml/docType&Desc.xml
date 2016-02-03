@@ -1,0 +1,4 @@
+<?xml version="1.0" standalone="yes"?>
+<ApplicationTypes><Type TKey="10" Description="Development Application:" ATDISDesc="" ReceivedDateCutOff="30-03-2007" DisplayableRelatedAppTypes="11,12,13,14,17,18,19" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
+<Type TKey="16" Description="Complying Development Certificate:" ATDISDesc="" ReceivedDateCutOff="30-03-2007" DisplayableRelatedAppTypes="12,13" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
+<Type TKey="10,16" Description="All Applications" DisplayOnly="True" /></ApplicationTypes>

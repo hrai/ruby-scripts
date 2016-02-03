@@ -1,0 +1,19 @@
+<p class="section">Cooma-Monaro Shire Council’s Application Tracker allows you to access details of applications (development applications, construction certificates, s68 approvals, occupation certificates, planning proposals) lodged at Council since_____. 
+</p>
+<br/>
+<p class="section">You can use this tool to: 
+</p>
+<ul><li>	track the progress of a specific application
+</li>
+<li>	view a past application
+</li>
+<li>	research development activity within Council
+</li>
+
+</ul>
+<p class="section">This page is your portal to access information by choosing the appropriate tool listed below to obtain information for your enquiry. 
+</p>
+<br/>
+<p class="section">Information in relation to older applications may not be available for every application. If you require further information that is not contained within a specific record, please contact Council on 02 6455 1911.
+</p>
+<br/>

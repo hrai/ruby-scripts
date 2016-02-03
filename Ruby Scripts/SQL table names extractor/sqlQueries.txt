@@ -1,0 +1,403 @@
+'-------------------------------------------------------------------------------
+' OlePathwayApplicationSQL.vb 
+' OleDb Pathway Application SQL Commands
+' Copyright (c) 2002,2003 Con Liaros, Infomaster Australia Pty Ltd
+' Created: Con Liaros - 5 November, 2002
+' Last Amended: Con Liaros, IFMA Pty Ltd - 17 January, 2003
+'-------------------------------------------------------------------------------
+
+Public Class OlePathwayApplicationSQL
+    '------Select Statements ------
+    Public Const SELApplicationProperties As String = "SELECT " & _
+                            "lpaprop.tpklpaprop AS pKey, lpaprop.fmtaddress, lpaprop.fmtowner " & _
+                            "FROM lparole,lpaprop " & _
+                            "WHERE (lparole.tfklocl=lpaprop.tpklpaprop " & _
+                            "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn=1 " & _
+                            "AND lpaprop.status='C' " & _
+                            "AND lparole.tfkappl=[APP_KEY]) "
+
+    Public Const SELApplicationProperties_PARC_BASED As String = "SELECT DISTINCT " & _
+                            "lpaprop.tpklpaprop pKey, lpaprop.fmtaddress, lpaprop.fmtowner " & _
+                            "FROM lpaprop,lpaprti,lpatipa,lpaparc,lparole " & _
+                            "WHERE lpaprop.tpklpaprop=lpaprti.tfklpaprop " & _
+                            "AND lpaprti.tfklpatitl=lpatipa.tfklpatitl " & _
+                            "AND lpatipa.tfklpaparc=lpaparc.tpklpaparc " & _
+                            "AND lpaprop.STATUS='C' " & _
+                            "AND lpatipa.tfklpaparc=lparole.tfklocl " & _
+                            "AND lparole.tfkappl=[APP_KEY]"
+
+    Public Const SELApplicationSubmitted As String = "SELECT " & _
+                            "aptype, appnnumb, appnyear, staged, amended, " & _
+                            "lpaprop.fmtaddress AS Address, " & _
+                            "lapappl.descr AS Description, " & _
+                            "lapappl.tpklapappl AS aKey, " & _
+                            "lpaprop.tpklpaprop AS pKey, " & _
+                            "lapappl.applndate AS Submitted " & _
+                            "FROM lpaprop,lparole,lapappl,lapapno,laptype " & _
+                            "WHERE (lapappl.tpklapappl=lapapno.tfklapappl " & _
+                            "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                            "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                            "AND lparole.tfklocl=lpaprop.tpklpaprop " & _
+                            "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn=1 " & _
+                            "AND lparole.primarypp = 'T' " & _
+                            "AND lapapno.appnnumb<>0 " & _
+                            "AND [WHERE_CLAUSE]) " & _
+                            "ORDER BY lapapno.tfklaptype,lapappl.lodgedate,lapapno.appnnumb"
+
+    Public Const SELApplicationSubmitted_No_Property_Attached As String = "SELECT " & _
+                            "aptype, appnnumb, appnyear, staged, amended, " & _
+                            "'' AS Address, " & _
+                            "lapappl.descr AS Description, " & _
+                            "lapappl.tpklapappl AS aKey, " & _
+                            "lapappl.applndate AS Submitted " & _
+                            "FROM lparole,lapappl,lapapno,laptype " & _
+                            "WHERE (lapappl.tpklapappl=lapapno.tfklapappl " & _
+                            "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                            "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                            "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn IN (1,2,3) " & _
+                            "AND lparole.primarypp = 'T' " & _
+                            "AND lapapno.appnnumb<>0 " & _
+                            "AND [WHERE_CLAUSE]) " & _
+                            "ORDER BY lapapno.tfklaptype,lapappl.lodgedate,lapapno.appnnumb"
+    '---Removed lapdecn in from clause ---CL---5/4/06---
+
+    Public Const SELApplicationSubmitted_PARC_BASED As String = "SELECT " & _
+                           "aptype, appnnumb, appnyear, staged, amended, " & _
+                           "lapappl.descr AS Description, " & _
+                           "lapappl.tpklapappl AS aKey, " & _
+                           "lapappl.applndate AS Submitted, " & _
+                           "(SELECT distinct lpaprop.fmtaddress " & _
+                           "FROM lpaprop,lpaprti,lpatipa,lpaparc " & _
+                           "WHERE lpaprop.tpklpaprop=lpaprti.tfklpaprop " & _
+                           "AND lpaprti.tfklpatitl=lpatipa.tfklpatitl " & _
+                           "AND lpatipa.tfklpaparc=lpaparc.tpklpaparc " & _
+                           "AND lpaprop.STATUS='C' AND ROWNUM<=1 " & _
+                           "AND lpatipa.tfklpaparc IN (lparole.tfklocl)) Address " & _
+                           "FROM lparole,lapappl,lapapno,laptype " & _
+                           "WHERE " & _
+                           "lapappl.tpklapappl=lapapno.tfklapappl " & _
+                           "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                           "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                           "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn=2 " & _
+                           "AND lparole.primarypp = 'T' " & _
+                           "AND lapapno.appnnumb<>0 " & _
+                           "AND [WHERE_CLAUSE] " & _
+                           "ORDER BY lapapno.tfklaptype,lapappl.lodgedate,lapapno.appnnumb"
+
+    Public Const SELApplicationSubmitted_PARC_BASED_No_Property_Attached As String = "SELECT " & _
+                           "aptype, appnnumb, appnyear, staged, amended, " & _
+                           "lapappl.descr AS Description, " & _
+                           "lapappl.tpklapappl AS aKey, " & _
+                           "lapappl.applndate AS Submitted, " & _
+                            "'' AS Address " & _
+                           "FROM lparole,lapappl,lapapno,laptype " & _
+                           "WHERE " & _
+                           "lapappl.tpklapappl=lapapno.tfklapappl " & _
+                           "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                           "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                           "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn IN (1,2,3) " & _
+                           "AND lparole.primarypp = 'T' " & _
+                           "AND lapapno.appnnumb<>0 " & _
+                           "AND [WHERE_CLAUSE] " & _
+                           "ORDER BY lapapno.tfklaptype,lapappl.lodgedate,lapapno.appnnumb"
+
+    Public Const SELApplicationDetermined As String = "SELECT " & _
+                            "aptype, appnnumb, appnyear, staged, amended, " & _
+                            "lpaprop.fmtaddress AS Address, " & _
+                            "lapappl.descr AS Description, " & _
+                            "lapappl.tpklapappl AS aKey, " & _
+                            "lpaprop.tpklpaprop AS pKey, " & _
+                            "lapdecn.decndate AS Determined, " & _
+                            "lapappl.applndate AS Submitted " & _
+                            "FROM lpaprop,lparole,lapappl,lapapno,laptype,lapdecn " & _
+                            "WHERE (lapappl.tpklapappl=lapapno.tfklapappl " & _
+                            "AND lapappl.tpklapappl=lapdecn.tfklapappl " & _
+                            "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                            "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                            "AND lparole.tfklocl=lpaprop.tpklpaprop " & _
+                            "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn=1 " & _
+                            "AND lparole.primarypp = 'T' " & _
+                            "AND lapapno.appnnumb<>0 " & _
+                            "AND [WHERE_CLAUSE]) " & _
+                            "ORDER BY lapapno.tfklaptype,lapappl.lodgedate,lapapno.appnnumb"
+
+    Public Const SELApplicationDetermined_No_Property_Attached As String = "SELECT " & _
+                            "aptype, appnnumb, appnyear, staged, amended, " & _
+                            "'' AS Address, " & _
+                            "lapappl.descr AS Description, " & _
+                            "lapappl.tpklapappl AS aKey, " & _
+                            "lapdecn.decndate AS Determined, " & _
+                            "lapappl.applndate AS Submitted " & _
+                            "FROM lparole,lapappl,lapapno,laptype,lapdecn " & _
+                            "WHERE (lapappl.tpklapappl=lapapno.tfklapappl " & _
+                            "AND lapappl.tpklapappl=lapdecn.tfklapappl " & _
+                            "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                            "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                            "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn IN (1,2,3) " & _
+                            "AND lparole.primarypp = 'T' " & _
+                            "AND lapapno.appnnumb<>0 " & _
+                            "AND [WHERE_CLAUSE]) " & _
+                            "ORDER BY lapapno.tfklaptype,lapappl.lodgedate,lapapno.appnnumb"
+
+    Public Const SELApplicationDetermined_PARC_BASED As String = "SELECT " & _
+                           "aptype, appnnumb, appnyear, staged, amended, " & _
+                           "lapappl.descr AS Description, " & _
+                           "lapappl.tpklapappl AS aKey, " & _
+                           "lapappl.applndate AS Submitted, " & _
+                           "lapdecn.decndate AS Determined, " & _
+                           "(SELECT distinct lpaprop.fmtaddress " & _
+                           "FROM lpaprop,lpaprti,lpatipa,lpaparc " & _
+                           "WHERE lpaprop.tpklpaprop=lpaprti.tfklpaprop " & _
+                           "AND lpaprti.tfklpatitl=lpatipa.tfklpatitl " & _
+                           "AND lpatipa.tfklpaparc=lpaparc.tpklpaparc " & _
+                           "AND lpaprop.STATUS='C' AND ROWNUM<=1 " & _
+                           "AND lpatipa.tfklpaparc IN (lparole.tfklocl)) Address " & _
+                           "FROM lparole,lapappl,lapapno,laptype,lapdecn " & _
+                           "WHERE " & _
+                           "lapappl.tpklapappl=lapapno.tfklapappl " & _
+                           "AND lapappl.tpklapappl=lapdecn.tfklapappl " & _
+                           "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                           "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                           "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn=2 " & _
+                           "AND lparole.primarypp = 'T' " & _
+                           "AND lapapno.appnnumb<>0 " & _
+                           "AND [WHERE_CLAUSE] " & _
+                           "ORDER BY lapapno.tfklaptype,lapappl.lodgedate,lapapno.appnnumb"
+
+    Public Const SELApplicationDetermined_PARC_BASED_No_Property_Attached As String = "SELECT " & _
+                           "aptype, appnnumb, appnyear, staged, amended, " & _
+                           "lapappl.descr AS Description, " & _
+                           "lapappl.tpklapappl AS aKey, " & _
+                           "lapappl.applndate AS Submitted, " & _
+                           "lapdecn.decndate AS Determined, " & _
+                           "'' AS Address " & _
+                           "FROM lparole,lapappl,lapapno,laptype,lapdecn " & _
+                           "WHERE " & _
+                           "lapappl.tpklapappl=lapapno.tfklapappl " & _
+                           "AND lapappl.tpklapappl=lapdecn.tfklapappl " & _
+                           "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                           "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                           "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn IN (1,2,3) " & _
+                           "AND lparole.primarypp = 'T' " & _
+                           "AND lapapno.appnnumb<>0 " & _
+                           "AND [WHERE_CLAUSE] " & _
+                           "ORDER BY lapapno.tfklaptype,lapappl.lodgedate,lapapno.appnnumb"
+
+    Public Const SELApplicationTypes As String = "SELECT tpklaptype AS TKey, " & _
+                            "aptype, descr AS Description " & _
+                            "FROM laptype WHERE Active='T' ORDER BY descr"
+
+    Public Const SELApplicationMaster As String = "SELECT " & _
+                            "lpaprop.fmtaddress AS Address, " & _
+                            "lapappl.descr AS Descr, " & _
+                            "lapappl.applndate AS Submitted, " & _
+                            "lapapno.appnnumb AS AppNo, " & _
+                            "lapapno.appnyear AS AppYear, " & _
+                            "lapapno.staged, " & _
+                            "lapapno.amended, " & _
+                            "laptype.aptype AS TKey, " & _
+                            "laptype.descr AS TypeDescr " & _
+                            "FROM lpaprop,lparole,lapappl,lapapno,laptype " & _
+                            "WHERE (lapappl.tpklapappl=lapapno.tfklapappl " & _
+                            "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                            "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                            "AND lparole.tfklocl=lpaprop.tpklpaprop " & _
+                            "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn=1 " & _
+                            "AND lapappl.tpklapappl=[APP_KEY])"
+
+
+    Public Const SELApplicationMaster_No_Property_Attached As String = "SELECT " & _
+                            "'' AS Address, " & _
+                            "lapappl.descr AS Descr, " & _
+                            "lapappl.applndate AS Submitted, " & _
+                            "lapapno.appnnumb AS AppNo, " & _
+                            "lapapno.appnyear AS AppYear, " & _
+                            "lapapno.staged, " & _
+                            "lapapno.amended, " & _
+                            "laptype.aptype AS TKey, " & _
+                            "laptype.descr AS TypeDescr " & _
+                            "FROM lparole,lapappl,lapapno,laptype " & _
+                            "WHERE (lapappl.tpklapappl=lapapno.tfklapappl " & _
+                            "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                            "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                            "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn in (1,2,3) " & _
+                            "AND lapappl.tpklapappl=[APP_KEY])"
+
+    Public Const SELApplicationMaster_PARC_BASED As String = "SELECT " & _
+                            "lapappl.descr AS Descr, " & _
+                            "lapappl.applndate AS Submitted, " & _
+                            "lapapno.appnnumb AS AppNo, " & _
+                            "lapapno.appnyear AS AppYear, " & _
+                            "lapapno.staged, " & _
+                            "lapapno.amended, " & _
+                            "laptype.aptype AS TKey, " & _
+                            "laptype.descr AS TypeDescr " & _
+                            "FROM lparole,lapappl,lapapno,laptype " & _
+                            "WHERE (lapappl.tpklapappl=lapapno.tfklapappl " & _
+                            "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                            "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                            "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn=2 " & _
+                            "AND lapappl.tpklapappl=[APP_KEY])"
+
+    Public Const SELApplicationTasks = "SELECT cwfrole.tfkappl AS AKey, " & _
+                            "cwfrole.roleseq AS Seq, cwftskt.cdecwftskt AS ShortCode, cwftskt.descr AS Description, " & _
+                            "cwftask.actstart AS Started, cwftask.actcomp AS Completed, cwftask.estcomp AS Due, " & _
+                            "cwftask.inclapptme AS IncApp ,cwftask.incltotal AS IncTotal " & _
+                            "FROM cwfrole, cwftskt, cwftask " & _
+                            "WHERE cwfrole.tfklocl=cwftask.tpkcwftask AND cwftask.tfkcwftskt=cwftskt.tpkcwftskt " & _
+                            "AND cwfrole.tfkappl=[APP_KEY] " & _
+                            "ORDER BY cwfrole.roleseq"
+
+    Public Const SELApplicationApplicants As String = "SELECT " & _
+                        "cnaidty.formatname AS Name, cnaidty.tpkcnaidty AS nKey, " & _
+                        "cnaaddr.formataddr AS Address, cnaaddr.tpkcnaaddr AS aKey, " & _
+                        "cnarolt.descr AS laprole " & _
+                        "FROM cnarole,cnaidty,cnaidta,cnaaddr,cnarolt " & _
+                        "WHERE (cnarole.tfkcnaidty=cnaidty.tpkcnaidty " & _
+                        "AND cnaidty.tpkcnaidty=cnaidta.tfkcnaidty " & _
+                        "AND cnaidta.tfkcnaaddr=cnaaddr.tpkcnaaddr " & _
+                        "AND cnarole.fkcnarolta=cnarolt.pkcnarolta AND cnarole.fkcnaroltn=cnarolt.pkcnaroltn " & _
+                        "AND cnarole.fkcnarolta IN ('LAP','LLC') AND cnarole.fkcnaroltn>=0 " & _
+                        "AND cnarole.tfkappl IN ([APP_KEY])) " & _
+                        "AND cnarole.histdate IS NULL " & _
+                        "ORDER BY cnarolt.descr, cnaidty.formatname"
+
+    Public Const SELApplicationPeople As String = "SELECT " & _
+                        "cnaidty.formatname AS Name, cnaidty.tpkcnaidty AS nKey, " & _
+                        "cnarolt.descr AS laprole " & _
+                        "FROM cnarole,cnaidty,cnarolt " & _
+                        "WHERE (cnarole.tfkcnaidty=cnaidty.tpkcnaidty " & _
+                        "AND cnarole.fkcnarolta=cnarolt.pkcnarolta AND cnarole.fkcnaroltn=cnarolt.pkcnaroltn " & _
+                        "AND cnarole.fkcnarolta IN ('LAP','LLC') AND cnarole.fkcnaroltn>=0 " & _
+                        "AND cnarole.tfkappl IN ([APP_KEY])) " & _
+                        "AND cnarole.histdate IS NULL " & _
+                        "[INC] " & _
+                        "ORDER BY cnarolt.descr, cnaidty.formatname"
+
+    Public Const SELApplicationDimensions As String = "SELECT " & _
+                        "lapdims.dimvalue, lapdimt.descr AS dimDescription " & _
+                        "FROM lapdims,lapdimt " & _
+                        "WHERE lapdims.tfklapdimt=lapdimt.tpklapdimt " & _
+                        "AND lapdims.tfklapappl=[APP_KEY]"
+
+    'Public Const SELApplicationDimensionsTemp As String = "SELECT " & _
+    '                    "lapdims.dimvalue " & _
+    '                    "FROM lapdims " & _
+    '                    "WHERE lapdims.tfklapappl=[APP_KEY] AND lapdims.tfklapdimt=6"
+
+    Public Const SELApplicationStatus As String = "SELECT lapstat.descr AS lapStatus " & _
+                        "FROM lapappl,lapstat " & _
+                        "WHERE lapappl.tfklapstat=lapstat.tpklapstat " & _
+                        "AND lapappl.tpklapappl=[APP_KEY]"
+
+    Public Const SELApplicationDecision As String = "SELECT " & _
+                        "lapdecn.decndate, lapatyp.descr AS Authority, lapdtyp.descr AS Decision " & _
+                        "FROM lapdecn,lapatyp,lapdtyp " & _
+                        "WHERE lapdecn.tfklapatyp=lapatyp.tpklapatyp " & _
+                        "AND lapdecn.tfklapdtyp=lapdtyp.tpklapdtyp " & _
+                        "AND lapdecn.tfklapappl=[APP_KEY]"
+
+    Public Const SELApplicationDecisionSQL As String = "SELECT " & _
+                        "lapdecn.decndate, lapatyp.descr AS Authority, lapdtyp.descr AS Decision " & _
+                        "FROM (lapdecn LEFT JOIN lapatyp ON lapdecn.tfklapatyp=lapatyp.tpklapatyp) " & _
+                        "LEFT JOIN lapdtyp ON lapdecn.tfklapdtyp=lapdtyp.tpklapdtyp " & _
+                        "WHERE lapdecn.tfklapappl=[APP_KEY]"
+
+    Public Const SELApplicationDecisionORA As String = "SELECT " & _
+                        "lapdecn.decndate, lapatyp.descr AS Authority, lapdtyp.descr AS Decision " & _
+                        "FROM lapdecn,lapatyp,lapdtyp " & _
+                        "WHERE lapdecn.tfklapatyp=lapatyp.tpklapatyp(+) " & _
+                        "AND lapdecn.tfklapdtyp=lapdtyp.tpklapdtyp(+) " & _
+                        "AND lapdecn.tfklapappl=[APP_KEY]"
+
+    Public Const SELApplicationOfficer As String = "SELECT fkappl,username,userid " & _
+                        "FROM laproff, csyuser WHERE tfkcsyuser=tpkcsyuser " & _
+                        "AND fkappl=[APP_KEY]"
+    Public Const SELApplicationPGroup As String = "SELECT tpklapappl,lappgrp.descr " & _
+                        "FROM lapappl,lappgrp WHERE tpklappgrp=tfklappgrp " & _
+                        "AND lapappl.tpklapappl=[APP_KEY]"
+
+    Public Const SELApplicationDocuments As String = "SELECT cwpmgtp.tpkcwpmgtp, " & _
+                        "cwpmgtp.descr, cwpreqs.summary, " & _
+                        "cwpreqs.issuedate, cwpreqs.refnumber, " & _
+                        "cwplink.tfkcwpfdoc AS dKey, cwpmgtp.mrgtypcode " & _
+                        "FROM cwplink, cwpreqs, cwpmgtp " & _
+                        "WHERE (cwpreqs.tpkcwpreqs = cwplink.tfkcwpreqs " & _
+                        "AND cwpreqs.tfkcwpmgtp=cwpmgtp.tpkcwpmgtp " & _
+                        "AND cwplink.tfkappl=[APP_KEY]) " & _
+                        "[INC]" & _
+                        "ORDER BY tfkcwpmgtp, IssueDate DESC"
+
+    Public Const SELApplicationRegisterSub As String = "SELECT " & _
+                        "aptype, appnnumb, appnyear, staged, amended, " & _
+                        "lpaprop.fmtaddress AS Address, " & _
+                        "lapappl.descr AS Description, " & _
+                        "lapappl.tpklapappl AS aKey, " & _
+                        "lpaprop.tpklpaprop AS pKey, " & _
+                        "lapappl.applndate AS Submitted, " & _
+                        "lapstat.descr AS status, " & _
+                        "formatname AS applicant " & _
+                        "FROM lpaprop,lparole,lapappl,lapapno,laptype,cnarole,lapstat " & _
+                        "WHERE (lapappl.tpklapappl=lapapno.tfklapappl " & _
+                        "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                        "AND lapappl.tfklapstat=lapstat.tpklapstat " & _
+                        "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                        "AND lparole.tfklocl=lpaprop.tpklpaprop " & _
+                        "AND cnarole.tfkappl=lapappl.tpklapappl " & _
+                        "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn=1 " & _
+                        "AND cnarole.fkcnarolta IN ('LAP', 'LLC') AND cnarole.fkcnaroltn=0 " & _
+                        "AND lparole.primarypp = 'T' " & _
+                        "AND lapapno.appnnumb<>0 " & _
+                        "AND [WHERE_CLAUSE]) " & _
+                        "ORDER BY lapapno.tfklaptype,lapappl.lodgedate,lapapno.appnnumb"
+
+    Public Const SELApplicationRegisterDet As String = "SELECT " & _
+                            "aptype, appnnumb, appnyear, staged, amended, " & _
+                            "lpaprop.fmtaddress AS Address, " & _
+                            "lapappl.descr AS Description, " & _
+                            "lapappl.tpklapappl AS aKey, " & _
+                            "lpaprop.tpklpaprop AS pKey, " & _
+                            "lapdecn.decndate AS Determined, " & _
+                        "lapdtyp.descr AS Decision, " & _
+                            "lapappl.applndate AS Submitted, " & _
+                        "lapstat.descr AS status, " & _
+                        "formatname AS applicant " & _
+                            "FROM lpaprop,lparole,lapappl,lapapno,laptype,lapdecn,cnarole,lapstat,lapdtyp " & _
+                            "WHERE (lapappl.tpklapappl=lapapno.tfklapappl " & _
+                            "AND lapappl.tpklapappl=lapdecn.tfklapappl " & _
+                            "AND lapdecn.tfklapdtyp=lapdtyp.tpklapdtyp " & _
+                            "AND lapapno.tfklaptype=laptype.tpklaptype " & _
+                        "AND lapappl.tfklapstat=lapstat.tpklapstat " & _
+                            "AND lparole.tfkappl=lapappl.tpklapappl " & _
+                            "AND lparole.tfklocl=lpaprop.tpklpaprop " & _
+                        "AND cnarole.tfkappl=lapappl.tpklapappl " & _
+                            "AND lparole.fklparolta IN ('LAP','LLC') AND lparole.fklparoltn=1 " & _
+                        "AND cnarole.fkcnarolta IN ('LAP', 'LLC') AND cnarole.fkcnaroltn=0 " & _
+                            "AND lparole.primarypp = 'T' " & _
+                            "AND lapapno.appnnumb<>0 " & _
+                            "AND [WHERE_CLAUSE]) " & _
+                            "ORDER BY lapapno.appnnumb"
+
+    Public Const SELApplicationName = "SELECT formatname FROM cnarole " & _
+                        "WHERE fkcnarolta='LLC' AND fkcnaroltn=10 AND tfkappl=[APP_KEY]"
+
+    Public Const SELApplicationAffected = "SELECT DISTINCT lapafpr.*, fmtaddress, tpklpaprop " & _
+                        "FROM lapafpr,lpaprop " & _
+                        "WHERE lapafpr.tfklpaprop=lpaprop.tpklpaprop AND tfklapappl = [APP_KEY] " & _
+                        "ORDER BY lapafpr.tfklpaprop"
+
+    Public Const SELApplicationSupportersObjectors = "SELECT count(*) from cwprstp, cwpresp " & _
+                                            "WHERE cwpresp.tfkcwprstp = cwprstp.tpkcwprstp " & _
+                                            "AND code = '[TYPE]' and tfkappl = [APP_KEY]"
+
+    Public Const SCLApplicationCancelled = "SELECT appnnumb FROM lapapno WHERE tfklapappl = [APP_KEY]"
+
+    '------DataSet Table Names------
+    Public Const TBLPropertyApplications As String = "PropertyApplications"
+    Public Const TBLApplicationSubmitted As String = "ApplicationSubmitted"
+    Public Const TBLApplicationDetermined As String = "ApplicationDetermined"
+    Public Const TBLApplicationTypes As String = "ApplicationTypes"
+    Public Const TBLApplicationMaster As String = "ApplicationMaster"
+    Public Const TBLApplicationOutstanding As String = "ApplicationOutstanding"
+
+End Class
