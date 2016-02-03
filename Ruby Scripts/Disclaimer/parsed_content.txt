@@ -1,19 +1,56 @@
-<p class="section">Cooma-Monaro Shire Council’s Application Tracker allows you to access details of applications (development applications, construction certificates, s68 approvals, occupation certificates, planning proposals) lodged at Council since_____. 
+<p class="section">Access to information contained on this website (the Service) is provided to you pursuant to the provisions of the Environmental Planning and Assessment Act, 1979 (NSW) and the Government Information (Public Access) Act, 2009 (NSW) [GIPA] as applicable. 
 </p>
 <br/>
-<p class="section">You can use this tool to: 
+<p class="section">By using this enquiry system you accept and agree to the Terms and Conditions set out below.
 </p>
-<ul><li>	track the progress of a specific application
-</li>
-<li>	view a past application
-</li>
-<li>	research development activity within Council
+<br/>
+<p class="section">You acknowledge, accept and agree that:
+</p>
+<br/>
+<ul><li>	Content and use of information 
 </li>
 
 </ul>
-<p class="section">This page is your portal to access information by choosing the appropriate tool listed below to obtain information for your enquiry. 
+<p class="section">The information provided by the Service may contain inaccuracies or errors.  Cooma-Monaro Shire Council (Council) makes no warranties or representations regarding the currency, quality, accuracy, merchantability or fitness for purpose of the information provided by the Service, or that the Service is free from any virus or other defect. It is your sole responsibility to make your own assessment of the information provided by the Service.  Council will not in any circumstances be liable to you for any loss or damage (including without limitation, consequential loss or damage) however caused and whether arising directly or indirectly from your access to or use of the information provided by the Service. 
 </p>
 <br/>
-<p class="section">Information in relation to older applications may not be available for every application. If you require further information that is not contained within a specific record, please contact Council on 02 6455 1911.
+<ul><li>	Indemnity
+</li>
+
+</ul>
+<p class="section">You indemnify and agree to keep indemnified Council, its employees, representatives and agents against all claims, demands, actions, proceedings, costs, expenses and liabilities (including without limitation legal costs and disbursements on a full indemnity basis) suffered or incurred by Council directly or indirectly as a result of:
+</p>
+<br/>
+<ul><li>	any breach of your obligations under these Terms and Conditions; or
+</li>
+<li>	arising or connected in any way with your access or use of the information provided by the Service. 
+</li>
+<li>	Copyright  
+</li>
+
+</ul>
+<p class="section">The documents and information provided on this website by Council constitute ‘open access information’ in accordance with Section 6 of the Government Information (Public Access) Act, 2009 and Schedule 1 of the Government Information (Public Access) Regulation, 2009.  Plans, drawings and any other documents associated with development applications that are provided on this website (including downloadable materials) may be subject to the copyright laws of Australia and international agreements with other countries. The contents of this website are subject to copyright and are protected by the laws of Australia and other countries through international treaties. 
+</p>
+<br/>
+<p class="section">You acknowledge, accept and agree that:
+</p>
+<br/>
+<ul><li>	You will not alter, copy, reproduce, republish, upload, distribute or modify any documents provided on Council's website, except as permitted by law; 
+</li>
+<li>	Where the material shown on this website incorporates any third party copyright or registered or unregistered trademarks, your access to and use of this information is subject to the relevant intellectual property rights of such third parties; and
+</li>
+<li>	Planning documents are provided for plan enquiry purposes.  The Cooma-Monaro Local Environmental Plan 2013 is available at http://www.legislation.nsw.gov.au
+</li>
+<li>	Liability 
+</li>
+
+</ul>
+<p class="section">To the maximum extent permitted by law, Council excludes all liability to you for loss or damage of any kind (however caused, including by negligence) arising from or relating in any way to the contents of this website and/or your use of it. You are responsible for assessing the accuracy, reliability, suitability and completeness of the material on or accessible through this website. You accept all risks and responsibility for all loss, damage, costs and other consequences resulting from using this website or the material on or accessible through this website.
+</p>
+<br/>
+<p class="section">Any information as to the processing of a Development Application obtained through Council's web based tracking system is intended as a guide only and in no way does the Council accept any responsibility for loss or harm as a result of information obtained and relied on from this facility. The information given cannot bind Council to determine the outcome or processing time of any development application. The information is independent of the formal development application process and in no way is designed to influence or guarantee the timing or outcome of the formal development application process. Persons wishing to confirm information in detail should contact Council to obtain a written response.
+</p>
+<br/>
+<p class="section">For further Development Application information which is not available to view on Council’s website, please contact Council on 02 6455 1911.
 </p>
 <br/>

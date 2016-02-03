@@ -6,7 +6,7 @@ def generate_table(file_name)
 		puts text
 		
 		arr = text.split /\t/
-		$result << '<tr>' + (arr.collect { |ele| '<td>' + ele + '</td>'}).join + "</tr>\n"
+		$result << '<tr>' + (arr.collect { |ele| '<td>' + ele + '</td>'}).join + '</tr>\n'
 	end
 
 	file.close
