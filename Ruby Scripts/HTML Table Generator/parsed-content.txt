@@ -1,15 +1,17 @@
-<table><tr><td>Application Tracker Home</td><td>Select this option to view applications submitted in the last 2 weeks. Applications are displayed on a map
+<table>
+<tr>
+<td>Application Tracker Home</td><td>Select this option to view applications submitted in the last 2 weeks. Applications are displayed on a map
 </td></tr>
 <tr><td>Search</td><td>Use the "Search" option if you have the application number or particulars about the property such as street or locality
 </td></tr>
 <tr><td>Undetermined Applications</td><td>Applications that are currently being assessed
 </td></tr>
 <tr><td>Applications on Exhibition</td><td>Applications that are being publicly notified in accordance with legislation and/or Cooma-Monaro Shire Council Development Control Plan 2014
-</td></tr>
+	</td></tr>
 <tr><td>Applications Submitted</td><td>View applications submitted over a specific period (week or month)
-</td></tr>
+	</td></tr>
 <tr><td>Applications Determined</td><td>View applications determined over a specific period (week or month)
-</td></tr>
-<tr><td>
-</td></tr>
-</table>
+	</td></tr>
+	<tr><td>
+	</td></tr>
+	</table>

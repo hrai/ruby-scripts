@@ -37,7 +37,8 @@ def sort_action_codes
 end
 
 def print_test_condition_for_xslt(codes, counter)
- 	result = "(string-length($chargeCode) = #{counter} and contains('#{codes}', $chargeCode))"
+	variable_name = ARGV[0]	
+ 	result = "(string-length($#{variable_name}) = #{counter} and contains('#{codes}', $#{variable_name}))"
  	puts result
  	
  	@str_buffer << (result + " or ")
