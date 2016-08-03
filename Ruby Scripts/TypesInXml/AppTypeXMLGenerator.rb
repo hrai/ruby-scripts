@@ -53,10 +53,20 @@ def getDocTypeXmlNode(line, receivedCutoffDate)
 	#parse 3rd element in the array for related apps configuration
 	relatedAppsAttr = getRelatedAppsAttributes(arr[2])
 
+	if relatedAppsAttr.nil?
+		relatedAppsAttr = ''
+	end
+	
 	#p arr
 	$app_types << arr[0].strip.chomp + ','
 
-	return '<Type TKey="' + arr[0].strip.chomp + '" Description="' + arr[1].strip.chomp + '" ATDISDesc="" ReceivedDateCutOff="' + receivedCutoffDate + '" ' + relatedAppsAttr + ' />' + $newLine
+	if receivedCutoffDate.nil?
+		date = '01/10/2015'
+		puts "receivedCutoffDate argument not supplied. Setting the value of the date as #{date}"
+		receivedCutoffDate = date 
+	end
+
+	return '<Type TKey="' +  arr[0].strip.chomp + '" Description="' + arr[1].strip.chomp +  '" ATDISDesc="" ReceivedDateCutOff="' + receivedCutoffDate + '" ' + relatedAppsAttr + ' />' + $newLine
 end
 
 def getTypeNodes(fileToReadFrom, receivedCutoffDate)

@@ -1,3 +1,1 @@
-10 -Development Application:	NO	parts, 11, 12, 13, 14, 17, 18, 19
-16 - Complying Development Certificate:	NO	parts, 12 ,13
-
+10-Development Applications	NO	NO
