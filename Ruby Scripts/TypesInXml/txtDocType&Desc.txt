@@ -1,0 +1,16 @@
+10 - Construction Certificate	NO	parts, 8
+8 - Development Applications	NO	parts, 10, 12, 14
+9 - Complying Development	NO	parts, 12, 14
+12 - Occupation Certificates	NO	parts, 8, 9
+5 - Development Applications - Pre 1999	NO	parts
+34 - Exempt Subdivision Certificate	NO	parts
+14 - Subdivision Certificate	NO	parts, 8, 9
+15 - Septic Tank Applications	NO	parts
+18 - Planning Proposals	NO	parts
+44 - Section 138 Driveways/Public Roads	NO	parts
+45 - Road Events - Temp Road Closure	NO	parts
+46 - Road Events	NO	parts
+47 - Footpath Occupation	NO	parts
+48 - Road Restoration	NO	parts
+81 - Footway Restaurant	NO	parts 
+

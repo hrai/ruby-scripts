@@ -47,6 +47,6 @@ def clean_string(fileToReadFrom, separator)
 end
 
 
-clean_string("people.txt", " or ")
+clean_string("txtPeople.txt", " or ")
 
 #puts $result

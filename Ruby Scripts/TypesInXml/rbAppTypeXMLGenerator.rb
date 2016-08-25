@@ -94,16 +94,16 @@ def writeXmlToFile(file)
 	file = File.open(file, 'w')
 
 	xmlHeader = '<?xml version="1.0" standalone="yes"?>' + $newLine
-	xmlContent = '<ApplicationTypes>' + $result
+	xmlContent = '<ApplicationTypes>' + $newLine + $result
 	xmlContent << '<Type TKey="' + $app_types[0...($app_types.length - 1)] + '" Description="All Applications" DisplayOnly="True" />'
-	xmlContent << '</ApplicationTypes>'
+	xmlContent << $newLine + '</ApplicationTypes>'
 	file.write(xmlHeader + xmlContent)
 	file.close
 
 end
 
 
-typeNodes = getTypeNodes('docType&Desc.txt', ARGV[0])
-writeXmlToFile('docType&Desc.xml')
+typeNodes = getTypeNodes('txtDocType&Desc.txt', ARGV[0])
+writeXmlToFile('xmlDoctype.xml')
 
 #puts $result
