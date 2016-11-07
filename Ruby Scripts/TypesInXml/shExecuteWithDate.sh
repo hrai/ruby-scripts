@@ -1,1 +1,1 @@
-ruby rbAppTypeXMLGenerator.rb "01-Jan-2015"
+ruby rbAppTypeXMLGenerator.rb "01-Jan-1980"

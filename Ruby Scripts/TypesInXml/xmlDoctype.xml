@@ -1,19 +1,8 @@
 <?xml version="1.0" standalone="yes"?>
 <ApplicationTypes>
-<Type TKey="10" Description="Construction Certificate" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="8" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="8" Description="Development Applications" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="10,12,14" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="9" Description="Complying Development" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="12,14" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="12" Description="Occupation Certificates" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="8,9" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="5" Description="Development Applications" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="no"  />
-<Type TKey="34" Description="Exempt Subdivision Certificate" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="14" Description="Subdivision Certificate" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="8,9" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="15" Description="Septic Tank Applications" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="18" Description="Planning Proposals" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="44" Description="Section 138 Driveways/Public Roads" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="45" Description="Road Events" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="no"  />
-<Type TKey="46" Description="Road Events" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="47" Description="Footpath Occupation" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="48" Description="Road Restoration" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="81" Description="Footway Restaurant" ATDISDesc="" ReceivedDateCutOff="01-Jan-2015" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
-<Type TKey="10,8,9,12,5,34,14,15,18,44,45,46,47,48,81" Description="All Applications" DisplayOnly="True" />
+<Type TKey="0" Description="Development Application" ATDISDesc="" ReceivedDateCutOff="01-Jan-1980" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart=""  />
+<Type TKey="1" Description="Construction Certificate" ATDISDesc="" ReceivedDateCutOff="01-Jan-1980" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart=""  />
+<Type TKey="2" Description="Complying Development Certificate" ATDISDesc="" ReceivedDateCutOff="01-Jan-1980" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart=""  />
+<Type TKey="12" Description="S. 96 Modification" ATDISDesc="" ReceivedDateCutOff="01-Jan-1980" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart=""  />
+<Type TKey="0,1,2,12" Description="All Applications" DisplayOnly="True" />
 </ApplicationTypes>

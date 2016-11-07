@@ -25,7 +25,7 @@ def read_file_into_array (file)
 end		
 
 def sort_action_codes 
-	str_arr = read_file_into_array "actioncode.txt"
+	str_arr = read_file_into_array "txtActioncode.txt"
 
 	#sort str_arr in alphabetical order
 	str_arr = str_arr.sort
