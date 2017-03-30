@@ -1,8 +1,14 @@
 <?xml version="1.0" standalone="yes"?>
 <ApplicationTypes>
-<Type TKey="0" Description="Development Application" ATDISDesc="" ReceivedDateCutOff="01-Jan-1980" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart=""  />
-<Type TKey="1" Description="Construction Certificate" ATDISDesc="" ReceivedDateCutOff="01-Jan-1980" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart=""  />
-<Type TKey="2" Description="Complying Development Certificate" ATDISDesc="" ReceivedDateCutOff="01-Jan-1980" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart=""  />
-<Type TKey="12" Description="S. 96 Modification" ATDISDesc="" ReceivedDateCutOff="01-Jan-1980" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart=""  />
-<Type TKey="0,1,2,12" Description="All Applications" DisplayOnly="True" />
+<Type TKey="5" Description="Planning Applications" ATDISDesc="" ReceivedDateCutOff="01-Jul-2005" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
+<Type TKey="6" Description="Building Applications" ATDISDesc="" ReceivedDateCutOff="01-Jul-2005" DisplayableRelatedAppTypes="" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
+<Type TKey="10" Description="Development Applications" ATDISDesc="" ReceivedDateCutOff="01-Jul-2005" DisplayableRelatedAppTypes="11,13,15,16,17,19" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
+<Type TKey="11" Description="Construction Certificate" ATDISDesc="" ReceivedDateCutOff="01-Jul-2005" DisplayableRelatedAppTypes="10" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
+<Type TKey="13" Description="Occupation Certificate" ATDISDesc="" ReceivedDateCutOff="01-Jul-2005" DisplayableRelatedAppTypes="10" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
+<Type TKey="15" Description="Subdivision Certificate" ATDISDesc="" ReceivedDateCutOff="01-Jul-2005" DisplayableRelatedAppTypes="10" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
+<Type TKey="16" Description="Section 82A Review" ATDISDesc="" ReceivedDateCutOff="01-Jul-2005" DisplayableRelatedAppTypes="10" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
+<Type TKey="17" Description="Section 68" ATDISDesc="" ReceivedDateCutOff="01-Jul-2005" DisplayableRelatedAppTypes="10" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
+<Type TKey="18" Description="Complying Development" ATDISDesc="" ReceivedDateCutOff="01-Jul-2005" DisplayableRelatedAppTypes="13,15,17" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
+<Type TKey="19" Description="Civil Construction Certificate" ATDISDesc="" ReceivedDateCutOff="01-Jul-2005" DisplayableRelatedAppTypes="10" DisplayRelatedParentApp="yes" DisplayRelatedAppsByAppPart="yes"  />
+<Type TKey="5,6,10,11,13,15,16,17,18,19" Description="All Applications" DisplayOnly="True" />
 </ApplicationTypes>

@@ -1,7 +1,7 @@
-801 Owner	YES
-780 CARE	NO
-781 Applicant	NO
-799 Owner at lodgement	YES
-788 - Consent Authority	NO
-782 Builder	NO
+Property Owner	YES
+Applicant	NO
+PCA	NO
+Builder	NO
+Accredited Certifier	NO
+Certifier	NO
 

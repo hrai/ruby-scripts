@@ -1,5 +1,10 @@
-0 - Development Application
-1 - Construction Certificate	
-2 - Complying Development Certificate	
-12 - S. 96 Modification	
-
+5-Planning Applications	NO	parts		
+6-Building Applications	NO	parts		
+10-Development Applications	NO	parts, 11, 13, 15, 16, 17, 19		
+11-Construction Certificate	NO	parts, 10		
+13-Occupation Certificate	NO	parts, 10		
+15-Subdivision Certificate	NO	parts, 10		
+16-Section 82A Review	NO	parts, 10		
+17-Section 68	NO	parts, 10		
+18-Complying Development	NO	parts, 13, 15, 17		
+19-Civil Construction Certificate	NO	parts, 10		
